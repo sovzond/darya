@@ -38,6 +38,10 @@ namespace TestRange
             return this;
         }
 
+        public void click()
+        {
+            driver.FindElement(By.Id("sovzond_widget_SimpleButton_3")).Click();
+        }
       
     }
 }

@@ -9,11 +9,11 @@ using System.Drawing.Imaging;
 
 namespace TestRange
 {
-   public class login
+   public class Login
     {
         private IWebDriver driver;
       
-        public login(IWebDriver driver)
+        public Login(IWebDriver driver)
         {
             this.driver = driver;
             
@@ -23,21 +23,21 @@ namespace TestRange
 
 
 
-         public login get1()
+         public Login get1()
         {
            driver.Navigate().GoToUrl("http://91.143.44.249/sovzond/portal/login.aspx");
             return this;
         }
 
-        public login click(IWebDriver driver)
+        public Login click(IWebDriver driver)
         {
 
             driver.FindElement(By.Id("cmdLogin")).Click();
-            return new login(driver);
+            return new Login(driver);
         }
 
 
-        public login loGin(String login, String passwd)
+        public Login login(String login, String passwd)
         {
            
             Thread.Sleep(2000);

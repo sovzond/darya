@@ -13,10 +13,10 @@ namespace TestRange
     {
         private IWebDriver driver;
         private IJavaScriptExecutor js;
-        public TransformJS(IWebDriver driver, IJavaScriptExecutor js)
+        public TransformJS(IWebDriver driver)
         {
             this.driver = driver;
-            this.js = js;
+            this.js = driver as IJavaScriptExecutor;
 
         }
         
