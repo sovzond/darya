@@ -7,19 +7,14 @@ using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using System.Drawing.Imaging;
 
-namespace TestRange
+namespace GetMapTest
 {
-
-
 
     [TestClass]
     public class UnitTestLogin
     {
         private IWebDriver driver = new FirefoxDriver();
-
-        static String baseUrl1 = "http://91.143.44.249/sovzond/portal/login.aspx";
-        //static String screenShotFileName = "C:/temp/Screenshot.png";
-
+        private TransformJS j = new TransformJS(new FirefoxDriver());
         private IWebElement getElementByText(IList<IWebElement> els, string text)
         {
             foreach (IWebElement el in els)
@@ -31,52 +26,35 @@ namespace TestRange
             }
             return null;
         }
-
         [TestMethod]
         public void GoToCoord()
         {
             Login u = new Login(driver);
             u.get1().login("guest", "guest").click(driver);//вход на сайт
-
-            TransformJS j = new TransformJS(driver);
             string startPoint = j.getMapCenter();// вычисляем координаты начальной точки центра. Получаем: "lon=70.51196941946516,lat=60.70837295920218"
-
             driver.FindElement(By.ClassName("gotoCoordsButton")).Click(); //делаем клик по иконке XY
-
             IList<IWebElement> elsTitle = driver.FindElements(By.ClassName("containerTitle"));
-
             //ищем текст "ПЕРЕХОД ПО КООРДИНАТАМ", при не нахождении возникает ошибка
             if (getElementByText(elsTitle, "ПЕРЕХОД ПО КООРДИНАТАМ") == null)
             {
                 Assert.Fail("ПЕРЕХОД ПО КООРДИНАТАМ не найден");
             }
-
-
             InputCoordWnd.get(driver).setLon(60, 50, 50).setLat(69, 59, 0).click();//нажимаем клавишу найти
             IList<IWebElement> img = driver.FindElements(By.ClassName("olAlphaImg"));//находим указатель
-
             int x = img[0].Location.X; //ищем координаты картинки по x
             int y = img[0].Location.Y; // ищем координаты картинки по y
             x = x + img[0].Size.Width / 2;//смещение по x картинки
             y = y - img[0].Size.Height / 3;//смещение по y картинки
-
             string Latimg1 = j.getLonLatFromPixel(x, y);//переводим экранные координаты
-
-
             LonLat imgCoord = new LonLat(Latimg1);// находи lon и lat кaртинки в неправильном формате
-
-            string imgPoint = j.transferFrom(imgCoord.getLon(), imgCoord.getLat());//находим правильный lon и lat 
-
-
+            string imgPoint = j.transferFrom(imgCoord.getLon(), imgCoord.getLat(), 900913, 4326);//находим правильный lon и lat 
             LonLat coord5 = new LonLat(imgPoint);
             double imgLon = coord5.getLon(); //находи lon кaртинки
             double imgLat = coord5.getLat();//находи lat кaртинки
-
             string changedPoint = j.getMapCenter();  // вычисляем координаты изменившегося центра. Получаем:"lon=69.9833333333329,lat=60.84722222222229"
             if (changedPoint == startPoint)//сравниваем начальные значения центра с изменившимися координатами заданными нами
             {
                 Assert.Fail("центр не изменен");
-
             }
             LonLat changedCoord = new LonLat(changedPoint);
             double changedLon = changedCoord.getLon();//находим lon получившегося цента
@@ -88,16 +66,13 @@ namespace TestRange
             if (changedLon != specLon1 || changedLat != specLat1)//сравниваем начальные значения центра с изменившимися координатами заданными нами
             {
                 Assert.Fail("не правильный переход");
-
             }
             // проверяем находится ли указатель в координатах заданными нами
             if (imgLon != specLon1 || imgLat != specLat1)//сравниваем начальные значения центра с изменившимися координатами заданными нами
             {
-                Assert.Fail("не правильный переход");
-
+                Assert.Fail("не правильный переход");      
             }
         }
-
     }
 }
 

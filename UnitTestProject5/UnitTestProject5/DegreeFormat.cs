@@ -7,11 +7,11 @@ using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using System.Drawing.Imaging;
 
-namespace TestRange
+namespace GetMapTest
 {
     class DegreeFormat
     {
-        FirefoxDriver firefox = new FirefoxDriver();
+     
         public DegreeFormat(int deg, int min, int sec)//ввод чисел перезагрузка
         {
             this.deg = deg;

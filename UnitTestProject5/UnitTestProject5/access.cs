@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using System.Drawing.Imaging;
 
-namespace TestRange
+namespace GetMapTest
 {
    public class Login
     {

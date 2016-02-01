@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-namespace TestRange
+namespace GetMapTest
 {
     public class InputCoordWnd
     {
