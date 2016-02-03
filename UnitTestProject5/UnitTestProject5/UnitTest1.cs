@@ -23,7 +23,20 @@ namespace GetMapTest
             }
             return null;
         }
-        [TestMethod]
+        private Boolean equalLonLat(LonLat changedPoint, LonLat startPoint) //сравниваем начальные значения центра с изменившимися координатами заданными нами
+        {
+            if (changedPoint != startPoint)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+                    
+      
+
+    [TestMethod]
         public void GoToCoord()
         {
         IWebDriver driver = new FirefoxDriver();
@@ -52,7 +65,7 @@ namespace GetMapTest
             double imgLon = coord5.getLon(); //находи lon кaртинки
             double imgLat = coord5.getLat();//находи lat кaртинки
             LonLat changedPoint = j.getMapCenter();  // вычисляем координаты изменившегося центра. Получаем:"lon=69.9833333333329,lat=60.84722222222229"
-            if (changedPoint == startPoint)//сравниваем начальные значения центра с изменившимися координатами заданными нами
+            if (equalLonLat(changedPoint, startPoint)==false)//сравниваем начальные значения центра с изменившимися координатами заданными нами
             {
                 Assert.Fail("центр не изменен");
             }
