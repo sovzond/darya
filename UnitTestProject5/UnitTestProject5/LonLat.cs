@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
-using System.Threading;
-using System.Drawing.Imaging;
-
 namespace GetMapTest
 {
     public class LonLat
@@ -29,6 +21,16 @@ namespace GetMapTest
         public double getLat()
         {
             return Math.Round(lat, 2);
+        }
+        public static Boolean equalLonLat(LonLat changedPoint, LonLat startPoint) //сравниваем начальные значения центра с изменившимися координатами заданными нами
+        {
+            if (changedPoint.lat != startPoint.lat || changedPoint.lon != startPoint.lon)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         private double lon;
         private double lat;

@@ -25,7 +25,7 @@ namespace GetMapTest
             driver = new FirefoxDriver();
             Login u = new Login(driver);
             string login1 = "guest";
-            u.get1().login(login1, login1).click1();//вход на сайт
+            u.get().login(login1, login1).click();//вход на сайт
 
             driver.FindElement(By.Id("sovzond_widget_SimpleButton_104")).Click();
             Thread.Sleep(5000);
