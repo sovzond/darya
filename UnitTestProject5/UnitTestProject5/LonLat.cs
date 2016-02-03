@@ -9,7 +9,7 @@ using System.Drawing.Imaging;
 
 namespace GetMapTest
 {
-    class LonLat
+    public class LonLat
     {
         public LonLat(string lonlat)
         {

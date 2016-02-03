@@ -17,26 +17,17 @@ namespace GetMapTest
         {
             this.driver = driver;
             this.js = driver as IJavaScriptExecutor;
-
-        }
-        private object projWGS84()
-        {
-            return js.ExecuteScript("{return new OpenLayers.Projection('EPSG:4326')}");
         }
 
-        private object proj900913()
-        {
-            return js.ExecuteScript("{ return new OpenLayers.Projection('EPSG:900913')}");
-        }
 
-        public string getMapCenter()
+        public LonLat getMapCenter()
         {
-
-            return (string)js.ExecuteScript("{var projWGS84 = new OpenLayers.Projection('EPSG:4326');" +
-                                            "var proj900913 = new OpenLayers.Projection('EPSG:900913'); " +
+           return new LonLat((string)js.ExecuteScript("{var projWGS84 = new OpenLayers.Projection('EPSG:4326');" +
+                                             "var proj900913 = new OpenLayers.Projection('EPSG:900913'); " +
                                             "var point1 = window.portal.stdmap.map.getCenter(); " +
                                             "var point2 = point1.transform(proj900913, projWGS84); " +
-                                            "return point2.toString()}");
+                                            "return point2.toString()}"));
+          
 
 
         }
@@ -59,11 +50,9 @@ namespace GetMapTest
         public string getLonLatFromPixel(int x, int y)
         {
 
-            return (string)js.ExecuteScript("return window.portal.stdmap.map.getLonLatFromPixel(new OpenLayers.Pixel( " + x + ", " + y + " )).toString()");//переводим экранные координаты
+            return  (string)js.ExecuteScript("return window.portal.stdmap.map.getLonLatFromPixel(new OpenLayers.Pixel( " + x + ", " + y + " )).toString()");//переводим экранные координаты
 
         }
-
-
 
     }
 }

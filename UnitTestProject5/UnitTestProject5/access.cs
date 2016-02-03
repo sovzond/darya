@@ -29,11 +29,11 @@ namespace GetMapTest
             return this;
         }
 
-        public Login click(IWebDriver driver)
+        public void click1()
         {
 
-            driver.FindElement(By.Id("cmdLogin")).Click();
-            return new Login(driver);
+             driver.FindElement(By.Id("cmdLogin")).Click();
+            
         }
 
 
