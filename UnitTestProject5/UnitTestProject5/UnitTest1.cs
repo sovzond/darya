@@ -28,7 +28,6 @@ namespace GetMapTest
         {
         IWebDriver driver = new FirefoxDriver();
         TransformJS j = new TransformJS(driver);
-
         Login u = new Login(driver);
             u.get1().login("guest", "guest").click1();//вход на сайт
            
