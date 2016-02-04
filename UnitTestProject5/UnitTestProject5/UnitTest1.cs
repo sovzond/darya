@@ -31,7 +31,13 @@ namespace GetMapTest
             }
             InputCoordWnd.get(driver).setLon(60, 50, 50).setLat(69, 59, 0).click();//нажимаем клавишу найти
         }
-      [TestMethod]
+        private double getDecimalDegree(int gr, int min, int sec)
+        {
+            DegreeFormat df1 = new DegreeFormat( gr,  min, sec);
+             double specLon1 = Math.Round(df1.getDecimalDegree(), 2);
+            return specLon1;
+        }
+        [TestMethod]
         public void GoToCoord()
         {
             IWebDriver driver = new FirefoxDriver();
@@ -55,11 +61,9 @@ namespace GetMapTest
                 Assert.Fail("центр не изменен");
             }
             double changedLon = changedPoint.getLon();//находим lon получившегося цента
-            double changedLat = changedPoint.getLat();//находим lat получившегося цента
-            DegreeFormat df1 = new DegreeFormat(69, 59, 0);
-            double specLon1 = Math.Round(df1.getDecimalDegree(), 2);// находим lon введенный нами
-            DegreeFormat df = new DegreeFormat(60, 50, 50);
-            double specLat1 = Math.Round(df.getDecimalDegree(), 2);//находим lat введенный нами
+            double changedLat = changedPoint.getLat();//находим lat получившегося цента  
+            double specLon1= getDecimalDegree(69, 59, 0);// находим lon введенный нами       
+            double specLat1 = getDecimalDegree(60, 50, 50);//находим lat введенный нами
             if (changedLon != specLon1 || changedLat != specLat1)//сравниваем начальные значения центра с изменившимися координатами заданными нами
             {
                 Assert.Fail("не правильный переход");
